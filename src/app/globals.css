@@ -1,0 +1,289 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-instrument-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-instrument-serif), ui-serif, Georgia, serif;
+  --color-canvas: #070a12;
+}
+
+:root {
+  --background: #070a12;
+  --foreground: #f4f7fb;
+  --accent: #ffc46b;
+  --accent-2: #ff9e4a;
+  --glow-1: rgba(255, 158, 74, 0.18);
+  --glow-2: rgba(56, 189, 248, 0.1);
+  color-scheme: dark;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.16) transparent;
+}
+
+html {
+  background: var(--background);
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100dvh;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--accent);
+  color: #080b12;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.skyline-app {
+  position: relative;
+  min-height: 100dvh;
+  isolation: isolate;
+  background:
+    radial-gradient(120% 90% at 50% -18%, var(--glow-1), transparent 58%),
+    radial-gradient(70% 55% at 108% 18%, var(--glow-2), transparent 62%),
+    radial-gradient(55% 45% at -10% 68%, var(--glow-2), transparent 65%),
+    linear-gradient(180deg, #080c15 0%, #060910 58%, #05080e 100%);
+}
+
+.panel {
+  position: relative;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.075);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.055) 0%, rgba(255, 255, 255, 0.022) 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.055),
+    0 30px 70px -50px rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  transition:
+    border-color 300ms ease,
+    background 300ms ease;
+}
+
+.panel:hover {
+  border-color: rgba(255, 255, 255, 0.11);
+}
+
+.panel-hero {
+  overflow: hidden;
+  background:
+    radial-gradient(90% 130% at 100% 0%, var(--glow-1), transparent 62%),
+    linear-gradient(140deg, rgba(255, 255, 255, 0.075) 0%, rgba(255, 255, 255, 0.02) 52%, rgba(255, 255, 255, 0.035) 100%);
+}
+
+.panel-hero::after {
+  content: "";
+  position: absolute;
+  inset: auto -20% -55% 35%;
+  height: 80%;
+  border-radius: 999px;
+  background: radial-gradient(closest-side, var(--glow-2), transparent 75%);
+  pointer-events: none;
+}
+
+.hairline {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.11), transparent);
+}
+
+.starfield {
+  background-image:
+    radial-gradient(1px 1px at 22px 34px, rgba(255, 255, 255, 0.7), transparent),
+    radial-gradient(1px 1px at 118px 86px, rgba(255, 255, 255, 0.45), transparent),
+    radial-gradient(1.4px 1.4px at 206px 154px, rgba(255, 255, 255, 0.6), transparent),
+    radial-gradient(1px 1px at 308px 58px, rgba(255, 255, 255, 0.35), transparent),
+    radial-gradient(1px 1px at 74px 190px, rgba(255, 255, 255, 0.3), transparent);
+  background-size: 380px 230px;
+  mask-image: linear-gradient(to bottom, black 0%, rgba(0, 0, 0, 0.5) 55%, transparent 82%);
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, rgba(0, 0, 0, 0.5) 55%, transparent 82%);
+  animation: twinkle 9s ease-in-out infinite alternate;
+}
+
+.grain {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  opacity: 0.032;
+  mix-blend-mode: soft-light;
+}
+
+.hero-halo {
+  background: radial-gradient(closest-side, var(--glow-1), transparent 72%);
+}
+
+.hero-weather {
+  animation: float-slow 8s ease-in-out infinite;
+  filter: drop-shadow(0 22px 40px rgba(0, 0, 0, 0.35));
+}
+
+.aqi-scale {
+  background: linear-gradient(
+    90deg,
+    #4ade80 0%,
+    #a3e635 14%,
+    #facc15 30%,
+    #fb923c 48%,
+    #f87171 66%,
+    #c084fc 83%,
+    #fb7185 100%
+  );
+}
+
+.uv-scale {
+  background: linear-gradient(90deg, #4ade80, #facc15 42%, #fb923c 64%, #f87171 82%, #c084fc);
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.045) 0%,
+    rgba(255, 255, 255, 0.095) 50%,
+    rgba(255, 255, 255, 0.045) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2.2s linear infinite;
+}
+
+.rise {
+  animation: rise 700ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: var(--delay, 0ms);
+}
+
+.sun-rays {
+  transform-box: view-box;
+  animation: spin-slow 60s linear infinite;
+}
+
+.cloud-float {
+  transform-box: view-box;
+  animation: cloud-drift 7s ease-in-out infinite alternate;
+}
+
+.precip-drops .drop {
+  animation: drop-pulse 1.6s ease-in-out infinite;
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.skip-link {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 100;
+  transform: translateY(-160%);
+  border-radius: 999px;
+  background: var(--accent);
+  color: #080b12;
+  padding: 10px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  transition: transform 180ms ease;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-1deg);
+  }
+  50% {
+    transform: translateY(-9px) rotate(1deg);
+  }
+}
+
+@keyframes cloud-drift {
+  from {
+    transform: translateX(-1.5px);
+  }
+  to {
+    transform: translateX(1.5px);
+  }
+}
+
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes drop-pulse {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes twinkle {
+  from {
+    opacity: 0.28;
+  }
+  to {
+    opacity: 0.6;
+  }
+}
+
+@keyframes shimmer {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+
+@keyframes progress-slide {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(400%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
