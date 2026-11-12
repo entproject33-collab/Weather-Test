@@ -45,7 +45,11 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<'/'>) {
   return (
-    <html lang="en" className={`${sans.variable} ${display.variable}`}>
+    <html
+      lang="en"
+      data-scroll-behavior="smooth"
+      className={`${sans.variable} ${display.variable}`}
+    >
       <body className="min-h-dvh font-sans antialiased">{children}</body>
     </html>
   )
